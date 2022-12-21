@@ -1,0 +1,11 @@
+FROM python:3
+# Ser application working directory
+WORKDIR /usr/src/app
+# Install requirements
+COPY requirements.txt ./
+RUN pip install --nno-cache-dir -r requirements.txt
+# Install application
+COPY app.py ./
+COPY app_test.py ./
+# Run application
+CMD python app.py
