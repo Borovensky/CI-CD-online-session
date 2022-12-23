@@ -13,8 +13,11 @@ pipeline {
 
     stage('Publish') {
       steps {
-        docker.withRegistry('', 'dockerhub-id') {
-          docker.image("${registry}:${env.BUILD_ID}").push('latest')}
+        script {
+          docker.withRegistry('', 'dockerhub-id') {
+            docker.image("${registry}:${env.BUILD_ID}").push('latest')}
+          }
+        
         }
       }
 
