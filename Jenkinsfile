@@ -11,8 +11,16 @@ pipeline {
       }
     }
 
+    stage('Publish') {
+      steps {
+        sh '''docker.withRegistry(\'\', \'dockerhub-id\') {
+docker.image("${registry}:${env.BUILD_ID}").push(\'latest\')
+}'''
+        }
+      }
+
+    }
+    environment {
+      registry = 'borovensky/cd-cd_test'
+    }
   }
-  environment {
-    registry = 'borovensky/cd-cd_test'
-  }
-}
